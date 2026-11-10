@@ -1,5 +1,3 @@
-// Place any global data in this file.
-// You can import this data from anywhere in your site by using the `import` keyword.
-
-export const SITE_TITLE = "Astro Blog";
-export const SITE_DESCRIPTION = "Welcome to my website!";
+export const SITE_TITLE = "Die Blauwe Schuite";
+export const SITE_DESCRIPTION =
+	"Herendispuut Die Blauwe Schuite, opgericht op 9 oktober 1942 en gelieerd aan het Tilburgs Studenten Corps St. Olof. Dispuutshuis Enugu staat aan de Korvelseweg in Tilburg.";

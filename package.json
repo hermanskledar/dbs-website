@@ -1,6 +1,6 @@
 {
 	"name": "dbs-website",
-	"description": "Build a personal website, blog, or portfolio with Astro.",
+	"description": "Website van herendispuut Die Blauwe Schuite, gelieerd aan T.S.C. St. Olof.",
 	"cloudflare": {
 		"label": "Astro Framework Starter",
 		"products": [
