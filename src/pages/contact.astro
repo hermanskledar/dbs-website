@@ -1,0 +1,69 @@
+---
+import Base from "../layouts/Base.astro";
+import PageIntro from "../components/PageIntro.astro";
+import { site } from "../data/site";
+
+const { lat, lon } = site.map;
+const bbox = `${lon - 0.008},${lat - 0.005},${lon + 0.008},${lat + 0.005}`;
+const mapSrc = `https://www.openstreetmap.org/export/embed.html?bbox=${encodeURIComponent(bbox)}&layer=mapnik&marker=${lat}%2C${lon}`;
+const mapLink = `https://www.openstreetmap.org/?mlat=${lat}&mlon=${lon}#map=17/${lat}/${lon}`;
+---
+
+<Base
+	title="Contact"
+	description="Contact met herendispuut Die Blauwe Schuite: Korvelseweg 78 in Tilburg, Instagram, telefoon en e-mail."
+>
+	<PageIntro
+		kicker="Kom langs"
+		title="Contact"
+		lede="Borrelen, een kamer op huis, of een vraag aan het bestuur: een dm, een belletje of een mail is genoeg."
+	/>
+
+	<section class="section">
+		<div class="wrap contact-layout">
+			<div class="panel">
+				<p class="kicker">Bereikbaar</p>
+				<h2>Dispuut {site.name}</h2>
+				<ul class="contact-list">
+					<li>
+						<span>Instagram</span>
+						<a href={site.instagramUrl} target="_blank" rel="noopener noreferrer">@{site.instagram}</a>
+					</li>
+					<li>
+						<span>Journaelscrivère</span>
+						<a href={site.phoneHref}>{site.phoneName} · {site.phoneDisplay}</a>
+					</li>
+					<li>
+						<span>E-mail</span>
+						<a href={`mailto:${site.email}`}>{site.email}</a>
+					</li>
+					<li>
+						<span>Moedervereniging</span>
+						<a href={site.associationUrl} target="_blank" rel="noopener noreferrer">{site.association}</a>
+					</li>
+				</ul>
+				<div class="legal">
+					<div>
+						<span class="muted">KvK</span>
+						<p>{site.kvk}</p>
+					</div>
+					<div>
+						<span class="muted">Rekening</span>
+						<p>{site.iban}</p>
+					</div>
+				</div>
+				<p class="muted" style="margin-top: 1rem;">
+					Correspondentieadres: {site.address.street}, {site.address.postcode} {site.address.city}.
+				</p>
+			</div>
+
+			<div class="map-frame">
+				<iframe title="Kaart van dispuutshuis Enugu aan de Korvelseweg 78 in Tilburg" src={mapSrc} loading="lazy"></iframe>
+				<p class="muted" style="padding: 0.7rem 1rem;">
+					{site.houseName} · {site.address.street}, {site.address.postcode} {site.address.city}.
+					<a href={mapLink} target="_blank" rel="noopener noreferrer">Open de kaart</a>
+				</p>
+			</div>
+		</div>
+	</section>
+</Base>

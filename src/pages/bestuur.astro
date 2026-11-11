@@ -1,0 +1,56 @@
+---
+import Base from "../layouts/Base.astro";
+import PageIntro from "../components/PageIntro.astro";
+import { board, initials } from "../data/site";
+---
+
+<Base
+	title="Bestuur"
+	description="Het dagelijks bestuur van herendispuut Die Blauwe Schuite: vaermeester, journaelscrivère en gelaghmeester."
+>
+	<PageIntro
+		kicker="Dagelijks bestuur"
+		title="Bestuur"
+		lede="Drie functies, met de namen die het dispuut er zelf aan geeft. Het bestuur is het aanspreekpunt voor leden, oud-leden en voor wie een keer wil komen borrelen."
+	/>
+
+	<section class="section">
+		<div class="wrap">
+			<div class="board-grid">
+				{
+					board.map((person) => (
+						<article class="person">
+							<div class="portrait">
+								{person.photo ? (
+									<img src={person.photo} alt="" style={`object-position: ${person.focus}`} />
+								) : (
+									<span class="monogram">{initials(person.name)}</span>
+								)}
+							</div>
+							<div class="person-body">
+								<p class="office">{person.office}</p>
+								<h2>{person.name}</h2>
+								<p>
+									{person.role} · lid sinds {person.since}
+								</p>
+							</div>
+						</article>
+					))
+				}
+			</div>
+			<div class="prose" style="margin-top: 2.5rem;">
+				<h2>De oude namen</h2>
+				<p>
+					Vaermeester is de voorzitter, journaelscrivère de secretaris en gelaghmeester de
+					penningmeester. De titels horen bij het dispuut, net als de zinspreuk
+					<em>Numerus stultorum infinitus est</em>.
+				</p>
+				<p>
+					Voor een borrel, een kamer op huis of een vraag aan het bestuur neem je contact op met
+					journaelscrivère Yannick Kremers.
+				</p>
+				<p><a class="btn btn-navy" href="/contact">Contact met het bestuur</a></p>
+			</div>
+		</div>
+	</section>
+</Base>
