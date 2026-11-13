@@ -1,8 +1,8 @@
 {
-	"name": "dbs-website",
-	"description": "Website van herendispuut Die Blauwe Schuite, gelieerd aan T.S.C. St. Olof.",
+	"name": "skledar-natuursteen",
+	"description": "Website van Skledar Natuursteen, natuursteenbedrijf in Waalwijk.",
 	"cloudflare": {
-		"label": "Astro Framework Starter",
+		"label": "Skledar Natuursteen",
 		"products": [
 			"Workers"
 		],

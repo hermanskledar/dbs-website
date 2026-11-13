@@ -1,26 +1,29 @@
 ---
-import Seal from "./Seal.astro";
-import { nav, site } from "../data/site";
+import { addressLine, nav, site } from "../data/site";
 
 const year = new Date().getFullYear();
 ---
 
 <footer class="site-footer">
 	<div class="wrap footer-grid">
-		<div class="footer-brand">
-			<span class="footer-seal"><Seal /></span>
-			<div>
-				<p class="footer-name">{site.name}</p>
-				<p class="footer-motto">{site.motto}</p>
-				<p class="footer-note">
-					{site.kind}, opgericht op {site.foundedLabel}. Gelieerd aan
-					<a href={site.associationUrl} target="_blank" rel="noopener noreferrer">{site.association}</a>.
-				</p>
-			</div>
+		<div>
+			<p class="footer-name">Skledar Natuursteen</p>
+			<p>Showroom en werkplaats voor natuursteen op maat.</p>
 		</div>
-
-		<nav aria-label="Footer">
-			<p class="footer-label">Op deze site</p>
+		<div>
+			<p class="footer-label">Bezoek</p>
+			<p>
+				{addressLine}<br />
+				<a href={site.phoneHref}>{site.phoneDisplay}</a><br />
+				<a href={`mailto:${site.email}`}>{site.email}</a>
+			</p>
+			<p>
+				{site.hours[0].short} {site.hours[0].time}<br />
+				{site.hours[1].short} {site.hours[1].time}
+			</p>
+		</div>
+		<div>
+			<p class="footer-label">Op de site</p>
 			<ul>
 				{
 					nav.map((item) => (
@@ -29,24 +32,12 @@ const year = new Date().getFullYear();
 						</li>
 					))
 				}
-			</ul>
-		</nav>
-
-		<div>
-			<p class="footer-label">Dispuutshuis {site.houseName}</p>
-			<address>
-				{site.address.street}<br />
-				{site.address.postcode} {site.address.city}
-			</address>
-			<ul class="footer-contact">
-				<li><a href={`mailto:${site.email}`}>{site.email}</a></li>
-				<li><a href={site.phoneHref}>{site.phoneDisplay}</a></li>
-				<li><a href={site.instagramUrl} target="_blank" rel="noopener noreferrer">Instagram @{site.instagram}</a></li>
+				<li><a href="/privacy">Privacy</a></li>
 			</ul>
 		</div>
 	</div>
-	<div class="wrap footer-bottom">
-		<p>© {year} Dispuut {site.name}</p>
-		<p>De schuit vaart altijd zijn eigen koers.</p>
+	<div class="wrap footer-base">
+		<p>© {year} {site.legalName}</p>
+		<p>KVK {site.kvk} · BTW {site.btw}</p>
 	</div>
 </footer>

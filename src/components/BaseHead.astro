@@ -1,23 +1,69 @@
 ---
 import "../styles/global.css";
-import { SITE_TITLE } from "../consts";
+import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
+import { addressLine, site } from "../data/site";
 
 interface Props {
 	title: string;
-	description: string;
+	description?: string;
 	image?: string;
 }
 
-const { title, description, image = "/images/hero.jpg" } = Astro.props;
+const { title, description = SITE_DESCRIPTION, image = "/images/keukenblad.webp" } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const socialImage = new URL(image, Astro.site);
-const fullTitle = title === SITE_TITLE ? `${title} — Numerus Stultorum Infinitus Est` : `${title} — ${SITE_TITLE}`;
+const fullTitle = title === SITE_TITLE ? `${title} — ${site.tagline}` : `${title} — ${SITE_TITLE}`;
+
+const jsonLd = {
+	"@context": "https://schema.org",
+	"@type": "HomeAndConstructionBusiness",
+	name: site.name,
+	legalName: site.legalName,
+	description: SITE_DESCRIPTION,
+	url: Astro.site?.href,
+	image: socialImage.href,
+	telephone: site.phoneE164,
+	email: site.email,
+	taxID: site.btw,
+	identifier: {
+		"@type": "PropertyValue",
+		name: "KVK",
+		value: site.kvk,
+	},
+	address: {
+		"@type": "PostalAddress",
+		streetAddress: site.address.street,
+		postalCode: site.address.postcode,
+		addressLocality: site.address.city,
+		addressCountry: "NL",
+	},
+	geo: {
+		"@type": "GeoCoordinates",
+		latitude: site.geo.lat,
+		longitude: site.geo.lon,
+	},
+	hasMap: site.mapsUrl,
+	openingHoursSpecification: [
+		{
+			"@type": "OpeningHoursSpecification",
+			dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+			opens: "07:30",
+			closes: "17:30",
+		},
+		{
+			"@type": "OpeningHoursSpecification",
+			dayOfWeek: "Saturday",
+			opens: "09:00",
+			closes: "13:00",
+		},
+	],
+};
 ---
 
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="generator" content={Astro.generator} />
-<meta name="theme-color" content="#0d3554" />
+<meta name="theme-color" content="#243034" />
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <link rel="canonical" href={canonicalURL} />
 <title>{fullTitle}</title>
@@ -26,7 +72,7 @@ const fullTitle = title === SITE_TITLE ? `${title} — Numerus Stultorum Infinit
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link
-	href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Outfit:wght@400;500;600;700&display=swap"
+	href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Outfit:wght@400;500;600&display=swap"
 	rel="stylesheet"
 />
 
@@ -40,3 +86,5 @@ const fullTitle = title === SITE_TITLE ? `${title} — Numerus Stultorum Infinit
 <meta name="twitter:title" content={fullTitle} />
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={socialImage} />
+<meta name="geo.placename" content={addressLine} />
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />

@@ -1,74 +1,60 @@
 ---
-import Seal from "./Seal.astro";
 import { nav, site } from "../data/site";
 
 const path = Astro.url.pathname.replace(/\/$/, "") || "/";
 ---
 
-<div class="utility">
-	<div class="wrap utility-inner">
-		<p>
-			{site.kind} van <a href={site.associationUrl} target="_blank" rel="noopener noreferrer">{site.association}</a>
-			<span aria-hidden="true"> · </span>
-			<span>Tilburg</span>
-		</p>
-		<p class="utility-links">
-			<a href={site.instagramUrl} target="_blank" rel="noopener noreferrer">@{site.instagram}</a>
-			<a href={`mailto:${site.email}`}>{site.email}</a>
-		</p>
-	</div>
-</div>
-
 <header class="site-header">
-	<div class="wrap header-inner">
-		<a class="brand" href="/" aria-label={`${site.name}, naar de homepagina`}>
-			<span class="brand-seal"><Seal compact /></span>
-			<span class="brand-text">
-				<span class="brand-name">{site.name}</span>
-				<span class="brand-sub">{site.motto}</span>
+	<div class="wrap bar">
+		<a class="wordmark" href="/">
+			<svg viewBox="0 0 36 32" aria-hidden="true">
+				<path fill="currentColor" d="M6.5 28 11 4h14l4.5 24h-23Z"></path>
+			</svg>
+			<span>
+				<span class="wordmark-name">Skledar</span>
+				<span class="wordmark-sub">Natuursteen</span>
 			</span>
 		</a>
-
 		<button class="nav-toggle" type="button" aria-expanded="false" aria-controls="menu">
-			<span class="nav-toggle-bars" aria-hidden="true"></span>
-			<span class="nav-toggle-label">Menu</span>
+			Menu
 		</button>
-
-		<nav id="menu" class="site-nav" aria-label="Hoofdmenu">
-			<ul>
-				{
-					nav.map((item) => (
-						<li>
-							<a href={item.href} aria-current={path === item.href ? "page" : undefined}>
-								{item.label}
-							</a>
-						</li>
-					))
-				}
-			</ul>
-			<a class="btn btn-gold" href="/contact">Kom borrelen</a>
+		<nav id="menu" aria-label="Hoofdmenu">
+			{
+				nav.map((item) => (
+					<a href={item.href} aria-current={path === item.href ? "page" : undefined}>
+						{item.label}
+					</a>
+				))
+			}
 		</nav>
+		<a class="button button-small phone" href={site.phoneHref}>
+			<span class="phone-long">{site.phoneDisplay}</span>
+			<span class="phone-short">Bellen</span>
+		</a>
 	</div>
 </header>
 
 <script>
 	const toggle = document.querySelector(".nav-toggle");
-	const nav = document.querySelector(".site-nav");
+	const menu = document.querySelector("#menu");
 
-	const setOpen = (open: boolean) => {
-		nav?.classList.toggle("is-open", open);
-		toggle?.setAttribute("aria-expanded", String(open));
-	};
+	if (toggle instanceof HTMLButtonElement && menu instanceof HTMLElement) {
+		const setOpen = (open: boolean) => {
+			toggle.setAttribute("aria-expanded", String(open));
+			if (open) menu.dataset.open = "true";
+			else delete menu.dataset.open;
+		};
 
-	toggle?.addEventListener("click", () => {
-		setOpen(toggle.getAttribute("aria-expanded") !== "true");
-	});
+		toggle.addEventListener("click", () => {
+			setOpen(toggle.getAttribute("aria-expanded") !== "true");
+		});
 
-	nav?.querySelectorAll("a").forEach((link) => {
-		link.addEventListener("click", () => setOpen(false));
-	});
+		menu.addEventListener("click", (event) => {
+			if (event.target instanceof HTMLAnchorElement) setOpen(false);
+		});
 
-	document.addEventListener("keydown", (event) => {
-		if (event.key === "Escape") setOpen(false);
-	});
+		document.addEventListener("keydown", (event) => {
+			if (event.key === "Escape") setOpen(false);
+		});
+	}
 </script>

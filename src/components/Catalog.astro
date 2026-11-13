@@ -1,0 +1,32 @@
+---
+import type { Piece } from "../data/catalog";
+
+interface Props {
+	items: Piece[];
+}
+
+const { items } = Astro.props;
+---
+
+<div class="catalog">
+	{
+		items.map((item, index) => (
+			<article class:list={["piece", { featured: index === 0 && Boolean(item.image) }]} id={item.slug}>
+				{item.image && (
+					<img
+						src={item.image}
+						alt={item.alt ?? ""}
+						width={item.width}
+						height={item.height}
+						loading={index === 0 ? "eager" : "lazy"}
+						decoding="async"
+					/>
+				)}
+				<div class="piece-body">
+					<h2>{item.title}</h2>
+					<p>{item.text}</p>
+				</div>
+			</article>
+		))
+	}
+</div>

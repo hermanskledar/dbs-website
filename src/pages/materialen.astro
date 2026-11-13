@@ -1,0 +1,76 @@
+---
+import PageHero from "../components/PageHero.astro";
+import Base from "../layouts/Base.astro";
+import { families, finishes } from "../data/catalog";
+---
+
+<Base
+	title="Materialen"
+	description="Marmer, graniet, kalksteen, leisteen, Belgisch hardsteen en composiet bij Skledar Natuursteen. Afwerkingen van hardsteen vergelijkt u in de showroom."
+>
+	<PageHero
+		eyebrow="Materialen"
+		title="Kies de steen aan de plaat."
+		lede="Onderstaand een greep uit wat er in de showroom ligt. Het assortiment wisselt. Voor een actuele plaat kunt u bellen of langskomen."
+	/>
+	<section class="page-section wrap">
+		{
+			families.map((family) => (
+				<article class="family" id={family.slug}>
+					<div>
+						<h2>{family.name}</h2>
+						<p>{family.text}</p>
+						<p class="also">Ook te bekijken: {family.also.join(", ")}.</p>
+					</div>
+					<ul class="swatches">
+						{family.samples.map((sample) => (
+							<li>
+								<figure>
+									<img
+										src={sample.image}
+										alt={`Monster van ${sample.name}.`}
+										width={sample.width}
+										height={sample.height}
+										loading="lazy"
+									/>
+									<figcaption>{sample.name}</figcaption>
+								</figure>
+							</li>
+						))}
+					</ul>
+				</article>
+			))
+		}
+
+		<article class="finish-block" id="hardsteen">
+			<p class="eyebrow">Belgisch hardsteen</p>
+			<h2>Afwerkingen</h2>
+			<p class="section-intro">
+				Hardsteen is de steen voor dorpels, spekbanden, plinten en afdekkers. De afwerking bepaalt of het vlak glad, licht getekend of nadrukkelijk bewerkt oogt.
+			</p>
+			<div class="finish-grid">
+				{
+					finishes.map((group) => (
+						<div>
+							<h3>{group.title}</h3>
+							<ul>
+								{group.names.map((name) => (
+									<li>{name}</li>
+								))}
+							</ul>
+						</div>
+					))
+				}
+			</div>
+		</article>
+
+		<article class="finish-block" id="composiet">
+			<p class="eyebrow">Composiet</p>
+			<h2>Een vlak zonder aders, als u dat wilt.</h2>
+			<p class="section-intro">
+				Naast natuursteen bewerken we composiet. Het kleurenassortiment is breed en ligt ter inzage in de showroom. Een blad wordt, net als bij natuursteen, op maat gezaagd, met spoelbak of achterwand als u dat wilt.
+			</p>
+			<a class="button" href="/contact">Vraag het assortiment na</a>
+		</article>
+	</section>
+</Base>

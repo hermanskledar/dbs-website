@@ -1,170 +1,206 @@
 ---
 import Base from "../layouts/Base.astro";
-import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
-import { birthdays, site } from "../data/site";
+import { addressLine, site } from "../data/site";
+import { SITE_TITLE } from "../consts";
 ---
 
-<Base title={SITE_TITLE} description={SITE_DESCRIPTION}>
+<Base title={SITE_TITLE} image="/images/terras.webp">
 	<section class="hero">
-		<div class="hero-inner">
-			<p class="kicker">{site.kind} · {site.association} · sinds {site.foundedYear}</p>
-			<h1>{site.name}</h1>
-			<p class="hero-motto">
-				{site.motto}
-				<span>{site.mottoNl}</span>
+		<div class="hero-copy">
+			<p class="eyebrow">Natuursteenbedrijf in Waalwijk</p>
+			<h1>Ontdek onze passie voor het mooiste natuursteen.</h1>
+			<p class="lead">
+				In de werkplaats aan de Energieweg zagen en bewerken we steen op maat. Voor de keuken, de badkamer, de gevel en de tuin. De showroom ligt naast de machines.
 			</p>
 			<div class="hero-actions">
-				<a class="btn btn-gold" href="/contact">Kom borrelen</a>
-				<a class="btn btn-ghost" href="/huis">Bekijk het huis</a>
+				<a class="button" href="/contact">Bezoek de showroom</a>
+				<a class="button button-ghost" href={site.phoneHref}>{site.phoneDisplay}</a>
 			</div>
+			<dl class="hero-facts">
+				<div>
+					<dt>Doordeweeks</dt>
+					<dd>7.30–17.30</dd>
+				</div>
+				<div>
+					<dt>Zaterdag</dt>
+					<dd>9.00–13.00</dd>
+				</div>
+				<div>
+					<dt>Werkplaats</dt>
+					<dd>Eigen zagerij en CNC</dd>
+				</div>
+			</dl>
+		</div>
+		<figure class="hero-photo">
+			<img
+				src="/images/terras.webp"
+				width="900"
+				height="1200"
+				alt="Terras van Belgisch hardsteen, gelegd in verschillende maten."
+				fetchpriority="high"
+			/>
+			<figcaption>Terras in Belgisch hardsteen</figcaption>
+		</figure>
+	</section>
+
+	<div class="wrap">
+		<ul class="stone-strip" aria-label="Materialen">
+			<li>Marmer</li>
+			<li>Graniet</li>
+			<li>Kalksteen</li>
+			<li>Leisteen</li>
+			<li>Belgisch hardsteen</li>
+			<li>Composiet</li>
+		</ul>
+	</div>
+
+	<section class="doors" aria-label="Binnen en buiten">
+		<a href="/binnen">
+			<img src="/images/vloer.webp" alt="" width="1415" height="2000" />
+			<span class="eyebrow">Binnen</span>
+			<strong>Vloeren, bladen en schouwen</strong>
+		</a>
+		<a href="/buiten">
+			<img src="/images/stoep.webp" alt="" width="1400" height="937" />
+			<span class="eyebrow">Buiten</span>
+			<strong>Dorpels, gevels en terrassen</strong>
+		</a>
+	</section>
+
+	<section class="section wrap">
+		<div class="section-head">
+			<h2>Gemaakt aan de Energieweg</h2>
+		</div>
+		<p class="section-intro">
+			Meten, zagen en schuren gebeurt in eigen huis. Naast het handwerk staat een 5-assige CNC, voor profielen die tot op de tekening moeten kloppen.
+		</p>
+		<div class="trio">
+			<figure>
+				<img src="/images/meten.webp" width="1400" height="937" alt="Een plaat natuursteen wordt opgemeten in de werkplaats." loading="lazy" />
+				<figcaption><strong>Meten</strong> Elke plaat wordt opgenomen voor hij de zaag in gaat.</figcaption>
+			</figure>
+			<figure>
+				<img src="/images/cnc.webp" width="2000" height="1339" alt="Zaagmachine die een plaat natuursteen op maat zaagt." loading="lazy" />
+				<figcaption><strong>Zagen</strong> Bladen, dorpels en neuten komen van de eigen zaag.</figcaption>
+			</figure>
+			<figure>
+				<img src="/images/schuren.webp" width="2000" height="1339" alt="Een hardstenen dorpel wordt geschuurd in de werkplaats." loading="lazy" />
+				<figcaption><strong>Afwerken</strong> Schuren, frijnen of polijsten, afhankelijk van de steen.</figcaption>
+			</figure>
 		</div>
 	</section>
 
-	<section class="stats" aria-label="In het kort">
-		<div class="wrap stats-grid">
-			<div>
-				<strong>{site.foundedYear}</strong>
-				<span>Opgericht op 9 oktober</span>
-			</div>
-			<div>
-				<strong>{site.houseName}</strong>
-				<span>Dispuutshuis aan de Korvel</span>
-			</div>
-			<div>
-				<strong>17</strong>
-				<span>Actieve leden</span>
-			</div>
-			<div>
-				<strong>Olof</strong>
-				<span>Moedervereniging in Tilburg</span>
-			</div>
+	<section class="section wrap" style="padding-top: 0">
+		<div class="section-head">
+			<h2>Uit de werkplaats</h2>
+		</div>
+		<div class="mosaic">
+			<a class="tile" href="/binnen#vloertegels">
+				<img src="/images/vloer.webp" alt="" width="1415" height="2000" loading="lazy" />
+				<span>Vloertegels</span>
+			</a>
+			<a class="tile" href="/binnen#keukenbladen">
+				<img src="/images/keukenblad.webp" alt="" width="2000" height="1339" loading="lazy" />
+				<span>Keukenbladen</span>
+			</a>
+			<a class="tile" href="/buiten#terrastegels">
+				<img src="/images/terras.webp" alt="" width="900" height="1200" loading="lazy" />
+				<span>Terrassen</span>
+			</a>
+			<a class="tile" href="/buiten#trappen">
+				<img src="/images/stoep.webp" alt="" width="1400" height="937" loading="lazy" />
+				<span>Stoepen</span>
+			</a>
+			<a class="tile" href="/binnen#schouwen">
+				<img src="/images/schouw.webp" alt="" width="960" height="720" loading="lazy" />
+				<span>Schouwen</span>
+			</a>
 		</div>
 	</section>
 
-	<section class="section" id="verhaal">
-		<div class="wrap center-copy">
-			<p class="kicker">Ons verhaal</p>
-			<h2>De schuit vaart zijn eigen koers</h2>
-			<p>
-				Dispuut Die Blauwe Schuite is een herendispuut van het Tilburgs Studenten Corps St. Olof.
-				Het dispuut is op 9 oktober 1942 opgericht en is daarmee een van de oudste van de vereniging.
-			</p>
-			<p>
-				De schuit vaart altijd zijn eigen koers. Dat zie je terug in het doen en laten van de leden.
-				De groep bestaat uit verschillende individuen, die door tradities en gebruiken een gezamenlijk
-				doel nastreven en daarin broederschap vinden.
-			</p>
-			<p>
-				Gebroederlijk gaan de leden deze periode aan en proberen zij er het meeste uit te halen, om
-				daarna het werkende leven tegemoet te gaan. Door die lange geschiedenis is er een grote en
-				trouwe achterban van oud-leden. Zij komen geregeld bijeen om de tradities en vieringen van het
-				dispuut te vieren.
-			</p>
+	<section class="section wrap" style="padding-top: 0">
+		<div class="section-head">
+			<h2>De steen zelf</h2>
+			<a href="/materialen">Alle materialen</a>
 		</div>
-		<div class="wrap pillars">
-			<article class="pillar">
-				<h3>Een dispuut, geen jaarclub</h3>
-				<p>
-					Leden komen uit verschillende lichtingen. Zo blijft het huis, de traditie en het bestuur
-					doorlopen terwijl er elk jaar nieuwe mannen aanschuiven.
-				</p>
-			</article>
-			<article class="pillar">
-				<h3>Eigen huis</h3>
-				<p>
-					Op de Korvelseweg staat Enugu: acht kamers, een eettafel voor elke dag en een huisbar met
-					tap. Vanuit daar fiets je in een paar minuten naar de sociëteit.
-				</p>
-			</article>
-			<article class="pillar">
-				<h3>Een achterban</h3>
-				<p>
-					Oud-leden blijven terugkomen voor de vieringen die het dispuut rijk is. De schuit stopt
-					niet bij het afstuderen.
-				</p>
-			</article>
-		</div>
-	</section>
-
-	<section class="feature-band" aria-label="Verder kijken">
-		<div class="wrap">
-			<h2>Drie deuren naar de schuit</h2>
-			<div class="cards">
-				<a class="card" href="/bestuur">
-					<img src="/images/hero.jpg" alt="Leden van Die Blauwe Schuite in het blauw" />
-					<div>
-						<h3>Bestuur</h3>
-						<p>Vaermeester, journaelscrivère en gelaghmeester: het dagelijks bestuur, met de oude namen van het dispuut.</p>
-						<span class="more">Naar het bestuur</span>
-					</div>
+		<p class="section-intro">
+			Een greep uit de showroom. Het assortiment wisselt; bel even als u een bepaalde soort zoekt.
+		</p>
+		<ul class="swatches">
+			<li>
+				<a href="/materialen#marmer">
+					<figure>
+						<img src="/images/stenen/bianco-carrara-c.webp" width="300" height="200" alt="" />
+						<figcaption>Bianco Carrara C</figcaption>
+					</figure>
 				</a>
-				<a class="card" href="/leden">
-					<img src="/images/leden/fokke.jpg" alt="Portret van een lid van Die Blauwe Schuite" />
-					<div>
-						<h3>Leden</h3>
-						<p>Zeventien leden, uit de lichtingen van 2018 tot en met 2025. Individuen die samen één dispuut vormen.</p>
-						<span class="more">Naar de leden</span>
-					</div>
+			</li>
+			<li>
+				<a href="/materialen#graniet">
+					<figure>
+						<img src="/images/stenen/baltic-brown.webp" width="300" height="200" alt="" />
+						<figcaption>Baltic Brown</figcaption>
+					</figure>
 				</a>
-				<a class="card" href="/huis">
-					<img src="/images/huis-gevel.png" alt="De gevel van dispuutshuis Enugu aan de Korvelseweg" />
-					<div>
-						<h3>Huis Enugu</h3>
-						<p>Een monumentaal pand uit 1906, met acht kamers en een zelfgebouwde bar. Ongeveer €400 per maand.</p>
-						<span class="more">Naar het huis</span>
-					</div>
+			</li>
+			<li>
+				<a href="/materialen#kalksteen">
+					<figure>
+						<img src="/images/stenen/massangis-clair.webp" width="300" height="200" alt="" />
+						<figcaption>Massangis Clair</figcaption>
+					</figure>
 				</a>
-			</div>
-		</div>
+			</li>
+			<li>
+				<a href="/materialen#leisteen">
+					<figure>
+						<img src="/images/stenen/montauk-black.webp" width="300" height="201" alt="" />
+						<figcaption>Montauk Black</figcaption>
+					</figure>
+				</a>
+			</li>
+		</ul>
 	</section>
 
-	<section class="section section-paper">
-		<div class="wrap quotes">
-			<blockquote>
-				<p>
-					Een eigenzinnig dispuut. Een dispuut met een rijk verleden. Een dispuut van individuen die
-					samen een geheel vormen.
-				</p>
-				<footer>Marcelle Hendrickx, wethouder Onderwijs, Tilburg</footer>
-			</blockquote>
-			<blockquote class="quote-aside">
-				<p>Never forget: fill it up again. Once it hits your lips, it’s so good.</p>
-				<footer>Frank the Tank</footer>
-			</blockquote>
+	<section class="band">
+		<div class="band-copy">
+			<p class="eyebrow">Belgisch hardsteen</p>
+			<h2>De steen van de gevel.</h2>
+			<p>
+				Dorpels, spekbanden, plinten, sluitstenen en afdekkers. In de klassieke bewerkingen, en in de bijzondere afwerkingen die u in de showroom kunt vergelijken.
+			</p>
+			<a class="button" href="/materialen#hardsteen">Bekijk de afwerkingen</a>
 		</div>
+		<img
+			src="/images/muur.webp"
+			width="1400"
+			height="935"
+			alt="Toegangshek met muurafdekkers en paalafdekkers van Belgisch hardsteen."
+			loading="lazy"
+		/>
 	</section>
 
-	<section class="section" id="agenda">
-		<div class="wrap split">
-			<div class="panel">
-				<p class="kicker">Agenda</p>
-				<h2>Verjaardagen</h2>
-				<ul class="birthday-list">
-					{
-						birthdays.map((item) => (
-							<li>
-								<span>{item.name}</span>
-								<time datetime={item.datetime}>{item.when}</time>
-							</li>
-						))
-					}
-				</ul>
-			</div>
-			<div class="panel">
-				<p class="kicker">Langskomen</p>
-				<h2>Borrelen op Enugu</h2>
-				<p>
-					Interesse in het huis of het dispuut? Kom een keer langs voor een biertje aan de bar en een
-					borrel Blankenheym.
-				</p>
-				<p class="visit-address">
-					{site.houseName}<br />
-					{site.address.street}<br />
-					{site.address.postcode} {site.address.city}
-				</p>
-				<p class="muted">Journaelscrivère {site.phoneName} · {site.phoneDisplay}</p>
-				<p><a class="btn btn-navy" href="/contact">Neem contact op</a></p>
-			</div>
+	<section class="visit">
+		<img
+			src="/images/pand.webp"
+			width="2000"
+			height="1336"
+			alt="Het pand van Skledar Natuursteen aan de Energieweg in Waalwijk."
+			loading="lazy"
+		/>
+		<div class="visit-copy">
+			<p class="eyebrow">Showroom</p>
+			<h2>Kom de steen bekijken.</h2>
+			<p>
+				{addressLine}. De werkplaats is open: u ziet hoe een blad of een dorpel wordt gemaakt. In de winkel liggen ook
+				<a href="/onderhoud">onderhoudsmiddelen</a> en diamantgereedschap.
+			</p>
+			<address>
+				{site.hours[0].days}: {site.hours[0].time}<br />
+				{site.hours[1].days}: {site.hours[1].time}<br />
+				{site.hours[2].days}: {site.hours[2].time}
+			</address>
+			<a class="button" href="/contact">Contact en route</a>
 		</div>
 	</section>
 </Base>

@@ -1,0 +1,24 @@
+---
+import Catalog from "../components/Catalog.astro";
+import PageHero from "../components/PageHero.astro";
+import Base from "../layouts/Base.astro";
+import { interior } from "../data/catalog";
+---
+
+<Base
+	title="Binnen"
+	description="Natuursteen voor binnen: vloertegels, keukenbladen, wastafels, schouwen, vensterbanken en trappen. Op maat gemaakt in Waalwijk."
+>
+	<PageHero
+		eyebrow="Binnen"
+		title="Steen voor het huis."
+		lede="Vloeren, bladen, schouwen en vensterbanken. Gezaagd in de werkplaats, in de maat die de ruimte vraagt."
+	/>
+	<section class="page-section wrap">
+		<Catalog items={interior} />
+		<div class="page-end">
+			<p>Neem een tekening, een mal of de maten van de nis mee. Dan kunnen we aan de plaat laten zien wat er mogelijk is.</p>
+			<a class="button" href="/contact">Maak een afspraak</a>
+		</div>
+	</section>
+</Base>

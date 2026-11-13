@@ -1,0 +1,54 @@
+---
+import PageHero from "../components/PageHero.astro";
+import Base from "../layouts/Base.astro";
+import { careGroups } from "../data/catalog";
+---
+
+<Base
+	title="Onderhoud"
+	description="Onderhoudsmiddelen voor natuursteen bij Skledar Natuursteen: het Lithofin-assortiment, kit, Tenax-lijm en diamantgereedschap."
+>
+	<PageHero
+		eyebrow="Onderhoud"
+		title="Het juiste middel bij de steen."
+		lede="In de winkel ligt het assortiment van Lithofin voor binnen en buiten, plus kit, lijm en gereedschap voor wie zelf zaagt."
+	/>
+	<section class="page-section wrap">
+		<p class="note">
+			Een zuur middel op gepolijst marmer of kalksteen etst de glans eraf. Neem bij twijfel een foto van de steen mee, of een reststuk. We wijzen het middel aan dat bij de soort en de afwerking past.
+		</p>
+		{
+			careGroups.map((group) => (
+				<section class="care-group">
+					<h2>{group.title}</h2>
+					<p>{group.intro}</p>
+					<ul class="care-list">
+						{group.items.map((item) => (
+							<li>
+								<strong>{item.name}</strong>
+								<span>{item.text}</span>
+							</li>
+						))}
+					</ul>
+				</section>
+			))
+		}
+		<section class="care-group">
+			<h2>Ook in de winkel</h2>
+			<ul class="care-list">
+				<li>
+					<strong>Kit, lijm en overige middelen</strong>
+					<span>AP170, Strip30, kit in diverse kleuren en Tenax-lijm.</span>
+				</li>
+				<li>
+					<strong>Gereedschap</strong>
+					<span>Diamantzaagbladen, schuurschijven, diamantboren en toebehoren. Vraag naar de folder van Red.</span>
+				</li>
+			</ul>
+		</section>
+		<div class="page-end">
+			<p>Voor een vlek die er al in zit: bel even en beschrijf de steen. Dan weet u of u moet komen met een foto, of meteen met het blad.</p>
+			<a class="button" href="/contact">Vraag advies</a>
+		</div>
+	</section>
+</Base>

@@ -1,0 +1,52 @@
+---
+import PageHero from "../components/PageHero.astro";
+import Base from "../layouts/Base.astro";
+import { site } from "../data/site";
+---
+
+<Base
+	title="Privacy"
+	description="Privacyverklaring van Skledar Natuursteen. Hoe het bedrijf omgaat met gegevens van klanten, leveranciers en bezoekers van de website."
+>
+	<PageHero
+		eyebrow="Privacy"
+		title="Hoe we met gegevens omgaan."
+		lede={`${site.legalName} verwerkt persoonsgegevens volgens de Algemene verordening gegevensbescherming.`}
+	/>
+	<section class="page-section wrap" style="max-width: 46rem">
+		<h2>Wie we zijn</h2>
+		<p>
+			{site.legalName}, {site.address.street}, {site.address.postcode} {site.address.city}. KVK {site.kvk}, BTW {site.btw}. Bereikbaar via
+			<a href={`mailto:${site.email}`}>{site.email}</a> en <a href={site.phoneHref}>{site.phoneDisplay}</a>.
+		</p>
+
+		<h2>Welke gegevens</h2>
+		<p>
+			Als u belt, mailt, een opdracht geeft of de showroom bezoekt, kunnen we naam, adres, telefoonnummer, e-mailadres en de inhoud van uw vraag of order verwerken. Van leveranciers bewaren we de contactgegevens die nodig zijn voor de samenwerking.
+		</p>
+		<p>
+			Het formulier op de contactpagina opent uw eigen e-mailprogramma. De website ontvangt die tekst niet en slaat hem niet op.
+		</p>
+
+		<h2>Waarom</h2>
+		<p>
+			We gebruiken de gegevens om een vraag te beantwoorden, een opdracht uit te voeren, te factureren en te voldoen aan de wettelijke bewaarplicht. Het belang daarbij is de overeenkomst met u, of een vraag die u zelf stelt. Acquisitie doen we alleen met gegevens die we daarvoor zelf hebben opgebouwd, en alleen voor eigen gebruik.
+		</p>
+
+		<h2>Bewaren en delen</h2>
+		<p>
+			Gegevens blijven zolang dat nodig is voor de klantrelatie en voor de wettelijke termijnen, bijvoorbeeld de fiscale bewaarplicht. We verkopen geen adressen. Een verwerker, zoals de host van deze site of onze e-mail, krijgt alleen toegang voor zover dat voor die dienst nodig is.
+		</p>
+
+		<h2>Cookies</h2>
+		<p>
+			Deze website plaatst geen trackingcookies en gebruikt geen analyse- of advertentiedienst. Een kaart op de contactpagina wordt geladen bij OpenStreetMap; die partij kan bij het ophalen van de kaart technische gegevens zien.
+		</p>
+
+		<h2>Uw rechten</h2>
+		<p>
+			U kunt vragen welke gegevens we van u hebben, en vragen om correctie of verwijdering voor zover we niet wettelijk verplicht zijn ze te bewaren. Stuur daarvoor een bericht naar
+			<a href={`mailto:${site.email}`}>{site.email}</a>. U kunt ook een klacht indienen bij de Autoriteit Persoonsgegevens.
+		</p>
+	</section>
+</Base>

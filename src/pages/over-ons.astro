@@ -1,0 +1,62 @@
+---
+import PageHero from "../components/PageHero.astro";
+import Base from "../layouts/Base.astro";
+import { addressLine } from "../data/site";
+---
+
+<Base
+	title="Over ons"
+	description="Skledar Natuursteen in Waalwijk, ontstaan in 2001 uit steenhouwerij Roitero. Showroom en werkplaats met een 5-assige CNC aan de Energieweg 1."
+	image="/images/pand.webp"
+>
+	<PageHero
+		eyebrow="Over ons"
+		title="Een steenhouwerij met een lange naam in Waalwijk."
+		lede="Natuursteen zit al generaties in de familie. De werkplaats en de showroom zitten sinds 2009 samen aan de Energieweg 1."
+	/>
+	<section class="page-section wrap">
+		<div>
+				<p>
+					Vader en grootvader hadden een steenhouwerij. In Waalwijk was Roitero decennialang de bekende naam in natuursteen: eerst aan de Winterdijk, daarna aan de Energieweg.
+				</p>
+				<p>
+					In 2001 is Roitero overgenomen en is Skledar Natuursteen ontstaan. In 2009 volgde de verhuizing van Energieweg 12 naar Energieweg 1, naar een groter pand. Daar bent u welkom in de showroom, en kunt u in de werkplaats zien hoe de steen wordt gemaakt.
+				</p>
+				<p>
+					Er wordt ambachtelijk gewerkt, met moderne machines erbij. Een 5-assige CNC snijdt profielen voor schouwen, dorpels en bladen naar tekening.
+				</p>
+				<ol class="timeline">
+					<li>
+						<span>Voor 2001</span>
+						Roitero, steenhouwerij in Waalwijk. Eerst aan de Winterdijk, later aan de Energieweg.
+					</li>
+					<li>
+						<span>2001</span>
+						Overname van Roitero. Skledar Natuursteen ontstaat.
+					</li>
+					<li>
+						<span>2009</span>
+						Verhuizing van Energieweg 12 naar Energieweg 1.
+					</li>
+				</ol>
+		</div>
+		<div class="trio about-photos">
+			<figure>
+				<img src="/images/pand.webp" width="2000" height="1336" alt="Gevel van Skledar Natuursteen aan de Energieweg in Waalwijk." />
+				<figcaption>{addressLine}</figcaption>
+			</figure>
+			<figure>
+				<img src="/images/cnc.webp" width="2000" height="1339" alt="De zaag in de werkplaats, bezig met een plaat natuursteen." loading="lazy" />
+				<figcaption>Zagen op de brugzaag in de werkplaats.</figcaption>
+			</figure>
+			<figure>
+				<img src="/images/schuren.webp" width="2000" height="1339" alt="Afwerken van hardsteen met een schuurmachine." loading="lazy" />
+				<figcaption>De laatste bewerking gebeurt met de hand.</figcaption>
+			</figure>
+		</div>
+		<div class="page-end">
+			<p>U bent welkom in de showroom en de werkplaats, tijdens de openingstijden.</p>
+			<a class="button" href="/contact">Plan een bezoek</a>
+		</div>
+	</section>
+</Base>

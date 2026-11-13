@@ -1,69 +1,138 @@
 ---
+import PageHero from "../components/PageHero.astro";
 import Base from "../layouts/Base.astro";
-import PageIntro from "../components/PageIntro.astro";
-import { site } from "../data/site";
+import { addressLine, site } from "../data/site";
 
-const { lat, lon } = site.map;
-const bbox = `${lon - 0.008},${lat - 0.005},${lon + 0.008},${lat + 0.005}`;
-const mapSrc = `https://www.openstreetmap.org/export/embed.html?bbox=${encodeURIComponent(bbox)}&layer=mapnik&marker=${lat}%2C${lon}`;
-const mapLink = `https://www.openstreetmap.org/?mlat=${lat}&mlon=${lon}#map=17/${lat}/${lon}`;
+const mapSrc = `https://www.openstreetmap.org/export/embed.html?bbox=5.052%2C51.688%2C5.078%2C51.700&layer=mapnik&marker=${site.geo.lat}%2C${site.geo.lon}`;
 ---
 
 <Base
 	title="Contact"
-	description="Contact met herendispuut Die Blauwe Schuite: Korvelseweg 78 in Tilburg, Instagram, telefoon en e-mail."
+	description="Bezoek Skledar Natuursteen aan de Energieweg 1 in Waalwijk. Open ma–vr 7.30–17.30 en zaterdag 9.00–13.00. Bel 0416 316 620."
+	image="/images/pand.webp"
 >
-	<PageIntro
-		kicker="Kom langs"
-		title="Contact"
-		lede="Borrelen, een kamer op huis, of een vraag aan het bestuur: een dm, een belletje of een mail is genoeg."
+	<PageHero
+		eyebrow="Contact"
+		title="Kom langs, of stuur de maten."
+		lede="De showroom en de werkplaats zitten op hetzelfde adres. Een belafspraak helpt als u een specifieke plaat wilt zien."
 	/>
-
-	<section class="section">
-		<div class="wrap contact-layout">
-			<div class="panel">
-				<p class="kicker">Bereikbaar</p>
-				<h2>Dispuut {site.name}</h2>
-				<ul class="contact-list">
-					<li>
-						<span>Instagram</span>
-						<a href={site.instagramUrl} target="_blank" rel="noopener noreferrer">@{site.instagram}</a>
-					</li>
-					<li>
-						<span>Journaelscrivère</span>
-						<a href={site.phoneHref}>{site.phoneName} · {site.phoneDisplay}</a>
-					</li>
-					<li>
-						<span>E-mail</span>
-						<a href={`mailto:${site.email}`}>{site.email}</a>
-					</li>
-					<li>
-						<span>Moedervereniging</span>
-						<a href={site.associationUrl} target="_blank" rel="noopener noreferrer">{site.association}</a>
-					</li>
-				</ul>
-				<div class="legal">
+	<section class="page-section wrap">
+		<div class="contact-layout">
+			<div>
+				<h2>Bezoek</h2>
+				<dl class="details">
 					<div>
-						<span class="muted">KvK</span>
-						<p>{site.kvk}</p>
+						<dt>Adres</dt>
+						<dd>
+							{site.address.street}<br />
+							{site.address.postcode} {site.address.city}
+						</dd>
 					</div>
 					<div>
-						<span class="muted">Rekening</span>
-						<p>{site.iban}</p>
+						<dt>Telefoon</dt>
+						<dd><a href={site.phoneHref}>{site.phoneDisplay}</a></dd>
 					</div>
+					<div>
+						<dt>E-mail</dt>
+						<dd><a href={`mailto:${site.email}`}>{site.email}</a></dd>
+					</div>
+					<div>
+						<dt>KVK</dt>
+						<dd>{site.kvk}</dd>
+					</div>
+					<div>
+						<dt>BTW</dt>
+						<dd>{site.btw}</dd>
+					</div>
+				</dl>
+				<h2>Openingstijden</h2>
+				<dl class="hours">
+					{
+						site.hours.map((row) => (
+							<div>
+								<dt>{row.days}</dt>
+								<dd>{row.time}</dd>
+							</div>
+						))
+					}
+				</dl>
+				<p>
+					<a href={site.mapsUrl} target="_blank" rel="noopener noreferrer">Route via Google Maps</a>
+				</p>
+			</div>
+			<form class="form" id="bericht" action={`mailto:${site.email}`} method="post" enctype="text/plain">
+				<h2>Stuur een bericht</h2>
+				<div class="form-row">
+					<label>
+						Naam
+						<input name="naam" type="text" autocomplete="name" required />
+					</label>
+					<label>
+						E-mail
+						<input name="email" type="email" autocomplete="email" required />
+					</label>
 				</div>
-				<p class="muted" style="margin-top: 1rem;">
-					Correspondentieadres: {site.address.street}, {site.address.postcode} {site.address.city}.
+				<div class="form-row">
+					<label>
+						Telefoon <span class="form-help">(niet verplicht)</span>
+						<input name="telefoon" type="tel" autocomplete="tel" />
+					</label>
+					<label>
+						Onderwerp
+						<select name="onderwerp">
+							<option>Keuken of badkamer</option>
+							<option>Vloer of terras</option>
+							<option>Gevel, dorpel of afdekker</option>
+							<option>Onderhoud</option>
+							<option>Anders</option>
+						</select>
+					</label>
+				</div>
+				<label>
+					Bericht
+					<textarea name="bericht" required></textarea>
+				</label>
+				<button class="button" type="submit">Open dit bericht in uw e-mail</button>
+				<p class="form-help">
+					Het formulier opent uw e-mailprogramma, gericht aan {site.email}. De website bewaart de tekst niet. Liever bellen? {site.phoneDisplay}.
 				</p>
-			</div>
-
-			<div class="map-frame">
-				<iframe title="Kaart van dispuutshuis Enugu aan de Korvelseweg 78 in Tilburg" src={mapSrc} loading="lazy"></iframe>
-				<p class="muted" style="padding: 0.7rem 1rem;">
-					{site.houseName} · {site.address.street}, {site.address.postcode} {site.address.city}.
-					<a href={mapLink} target="_blank" rel="noopener noreferrer">Open de kaart</a>
-				</p>
-			</div>
+				<p class="form-status" role="status" hidden></p>
+			</form>
+		</div>
+		<div class="map">
+			<iframe title={`Kaart van ${addressLine}`} src={mapSrc} loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 		</div>
 	</section>
 </Base>
+
+<script>
+	const form = document.querySelector("#bericht");
+	if (form instanceof HTMLFormElement) {
+		form.addEventListener("submit", (event) => {
+			event.preventDefault();
+			const data = new FormData(form);
+			const name = String(data.get("naam") ?? "").trim();
+			const email = String(data.get("email") ?? "").trim();
+			const phone = String(data.get("telefoon") ?? "").trim();
+			const topic = String(data.get("onderwerp") ?? "").trim();
+			const message = String(data.get("bericht") ?? "").trim();
+			const status = form.querySelector(".form-status");
+			if (!(status instanceof HTMLElement)) return;
+
+			if (!name || !email.includes("@") || !message) {
+				status.hidden = false;
+				status.textContent = "Vul uw naam, een geldig e-mailadres en een bericht in.";
+				return;
+			}
+
+			const body = [`Naam: ${name}`, `E-mail: ${email}`, phone ? `Telefoon: ${phone}` : "", `Onderwerp: ${topic}`, "", message]
+				.filter(Boolean)
+				.join("\n");
+			const href = `mailto:info@skledarnatuursteen.nl?subject=${encodeURIComponent(`Bericht via de website: ${topic}`)}&body=${encodeURIComponent(body)}`;
+			status.hidden = false;
+			status.textContent =
+				"Uw e-mailprogramma opent met dit bericht. Gebeurt dat niet, mail dan zelf naar info@skledarnatuursteen.nl of bel 0416 316 620.";
+			window.location.href = href;
+		});
+	}
+</script>

@@ -1,0 +1,24 @@
+---
+import Catalog from "../components/Catalog.astro";
+import PageHero from "../components/PageHero.astro";
+import Base from "../layouts/Base.astro";
+import { exterior } from "../data/catalog";
+---
+
+<Base
+	title="Buiten"
+	description="Natuursteen voor buiten: terrastegels, deur- en raamdorpels, spekbanden, plinten, trappen en muurafdekkers. Skledar Natuursteen in Waalwijk."
+>
+	<PageHero
+		eyebrow="Buiten"
+		title="Steen voor de gevel en de tuin."
+		lede="Dorpels, banden, stoepen en terrassen, vooral in Belgisch hardsteen. De voorbeelden liggen in de werkplaats."
+	/>
+	<section class="page-section wrap">
+		<Catalog items={exterior} />
+		<div class="page-end">
+			<p>Voor een dorpel of een afdekker helpt een schets van het metselwerk. De waterhol en de neuten stemmen we daarop af.</p>
+			<a class="button" href="/contact">Bespreek uw gevel</a>
+		</div>
+	</section>
+</Base>
