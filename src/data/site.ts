@@ -97,22 +97,18 @@ const months = [
 // Day and month only, no year. The homepage orders these by the next occurrence.
 export const birthdays = [
 	{ name: "Maurits Vonhogen", month: 11, day: 27 },
-	{ name: "Julius Broekhof", month: 03, day: 05 },
-	{ name: "Olivier Rijsman", month: 07, day: 09 },
-	{ name: "Mats Deckers", month: 05, day: 27 },
-	{ name: "Yannick Kremers", month: 11, day: 07 },
+	{ name: "Julius Broekhof", month: 3, day: 5 },
+	{ name: "Olivier Rijsman", month: 7, day: 9 },
+	{ name: "Mats Deckers", month: 5, day: 27 },
+	{ name: "Yannick Kremers", month: 11, day: 7 },
 	{ name: "Gabriel Te Slaa", month: 10, day: 24 },
 	{ name: "Rein Bakker", month: 10, day: 29 },
 	{ name: "Herman Skledar", month: 12, day: 12 },
-	{ name: "Machiel van Velden", month: 05, day: 18 },
-	{ name: "Koen Holst", month: 09, day: 14 },
-	{ name: "FLoris van Diepen", month: 03, day: 12 },
-	{ name: "Sam Waals", month: 07, day: 22 },
-	{ name: "Bastiaan Houben", month: 08, day: 21},
-
-
-
-
+	{ name: "Machiel van Velden", month: 5, day: 18 },
+	{ name: "Koen Holst", month: 9, day: 14 },
+	{ name: "FLoris van Diepen", month: 3, day: 12 },
+	{ name: "Sam Waals", month: 7, day: 22 },
+	{ name: "Bastiaan Houben", month: 8, day: 21 },
 ] as const;
 
 export type Birthday = (typeof birthdays)[number];
