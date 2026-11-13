@@ -95,6 +95,7 @@ const months = [
 ] as const;
 
 // Day and month only, no year. The homepage orders these by the next occurrence.
+export const visibleBirthdays = 5;
 export const birthdays = [
 	{ name: "Maurits Vonhogen", month: 11, day: 27 },
 	{ name: "Julius Broekhof", month: 3, day: 5 },

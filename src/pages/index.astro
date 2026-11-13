@@ -1,7 +1,7 @@
 ---
 import Base from "../layouts/Base.astro";
 import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
-import { members, site, upcomingBirthdays } from "../data/site";
+import { members, site, upcomingBirthdays, visibleBirthdays } from "../data/site";
 
 const agenda = upcomingBirthdays();
 const firstYear = Math.min(...members.map((member) => member.since));
@@ -146,8 +146,8 @@ const lastYear = Math.max(...members.map((member) => member.since));
 				<h2>Verjaardagen</h2>
 				<ul class="birthday-list" data-birthdays>
 					{
-						agenda.map((item) => (
-							<li data-month={item.month} data-day={item.day}>
+						agenda.map((item, index) => (
+							<li data-month={item.month} data-day={item.day} hidden={index >= visibleBirthdays}>
 								<span>{item.name}</span>
 								<time datetime={item.datetime}>{item.when}</time>
 							</li>
@@ -175,7 +175,7 @@ const lastYear = Math.max(...members.map((member) => member.since));
 </Base>
 
 <script>
-	import { nextBirthdayKey } from "../data/site";
+	import { nextBirthdayKey, visibleBirthdays } from "../data/site";
 
 	const list = document.querySelector<HTMLElement>("[data-birthdays]");
 	if (list) {
@@ -185,6 +185,9 @@ const lastYear = Math.max(...members.map((member) => member.since));
 				nextBirthdayKey(Number(a.dataset.month), Number(a.dataset.day)) -
 				nextBirthdayKey(Number(b.dataset.month), Number(b.dataset.day)),
 		);
-		for (const item of items) list.append(item);
+		items.forEach((item, index) => {
+			item.hidden = index >= visibleBirthdays;
+			list.append(item);
+		});
 	}
 </script>
