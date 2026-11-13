@@ -64,13 +64,6 @@ export const board = [
 
 // One line per lid. Leave photo out to show initials. Put the file in public/images/leden/.
 export const members = [
-	{ name: "Fokke Klöpping", since: 2018, photo: "/images/leden/fokke.jpg", focus: "center 35%" },
-	{ name: "Danny Ester", since: 2019, photo: "/images/leden/danny.jpg", focus: "center 30%" },
-	{ name: "Niek Verdegaal", since: 2020, photo: "/images/leden/niek.jpg", focus: "center 30%" },
-	{ name: "Nando Pelgrom", since: 2020, photo: "/images/leden/nando.jpg", focus: "center 30%" },
-	{ name: "Riley Roodenburg", since: 2021, photo: "/images/leden/riley.jpg", focus: "center 30%" },
-	{ name: "Stijn Bogaert", since: 2021, photo: "/images/leden/stijn.jpg", focus: "center 30%" },
-	{ name: "Ties Rollingswier", since: 2021, photo: "/images/leden/ties.jpg", focus: "center 30%" },
 	{ name: "Maurits Vonhögen", since: 2022, photo: "/images/leden/maurits.jpg", focus: "center 25%" },
 	{ name: "Oliver Rijsman", since: 2022, photo: "/images/leden/oliver.jpg", focus: "center 25%" },
 	{ name: "Julius Broekhof", since: 2022, photo: "/images/leden/julius.jpg", focus: "center 25%" },
@@ -79,8 +72,11 @@ export const members = [
 	{ name: "Yannick Kremers", since: 2023, photo: "/images/leden/yannick.png", focus: "center 20%" },
 	{ name: "Gabriel te Slaa", since: 2024, photo: undefined, focus: "center" },
 	{ name: "Mats Deckers", since: 2024, photo: undefined, focus: "center" },
-	{ name: "Faas Jongbloed", since: 2025, photo: "/images/leden/faas.jpg", focus: "center 18%" },
 	{ name: "Rein Bakker", since: 2025, photo: "/images/leden/rein.jpg", focus: "center 20%" },
+	{ name: "Herman Skledar", since: 2025, photo: undefined, focus: "center 18%" },
+	{ name: "Sam Waals", since: 2026, photo: undefined, focus: "center 18%" },
+	{ name: "Floris van Diepen", since: 2026, photo: undefined, focus: "center 18%" },
+	{ name: "Bastiaan Houben", since: 2026, photo: undefined, focus: "center 18%" },
 ] as const;
 
 const months = [
@@ -100,11 +96,23 @@ const months = [
 
 // Day and month only, no year. The homepage orders these by the next occurrence.
 export const birthdays = [
-	{ name: "Riley Roodenburg", month: 1, day: 29 },
-	{ name: "Julius Broekhof", month: 3, day: 5 },
-	{ name: "Juriaan", month: 3, day: 7 },
-	{ name: "Yannick Kremers", month: 11, day: 7 },
-	{ name: "Maurits Vonhögen", month: 11, day: 27 },
+	{ name: "Maurits Vonhogen", month: 11, day: 27 },
+	{ name: "Julius Broekhof", month: 03, day: 05 },
+	{ name: "Olivier Rijsman", month: 07, day: 09 },
+	{ name: "Mats Deckers", month: 05, day: 27 },
+	{ name: "Yannick Kremers", month: 11, day: 07 },
+	{ name: "Gabriel Te Slaa", month: 10, day: 24 },
+	{ name: "Rein Bakker", month: 10, day: 29 },
+	{ name: "Herman Skledar", month: 12, day: 12 },
+	{ name: "Machiel van Velden", month: 05, day: 18 },
+	{ name: "Koen Holst", month: 09, day: 14 },
+	{ name: "FLoris van Diepen", month: 03, day: 12 },
+	{ name: "Sam Waals", month: 07, day: 22 },
+	{ name: "Bastiaan Houben", month: 08, day: 21},
+
+
+
+
 ] as const;
 
 export type Birthday = (typeof birthdays)[number];
