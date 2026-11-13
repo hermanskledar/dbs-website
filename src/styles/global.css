@@ -577,6 +577,11 @@ blockquote footer {
 	border-bottom: 1px solid var(--line);
 }
 
+/* The row uses display:flex, which overrides the hidden attribute. */
+.birthday-list li[hidden] {
+	display: none !important;
+}
+
 .birthday-list time,
 .muted {
 	color: var(--muted);
