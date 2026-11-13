@@ -62,6 +62,7 @@ export const board = [
 	},
 ] as const;
 
+// One line per lid. Leave photo out to show initials. Put the file in public/images/leden/.
 export const members = [
 	{ name: "Fokke Klöpping", since: 2018, photo: "/images/leden/fokke.jpg", focus: "center 35%" },
 	{ name: "Danny Ester", since: 2019, photo: "/images/leden/danny.jpg", focus: "center 30%" },
@@ -82,13 +83,48 @@ export const members = [
 	{ name: "Rein Bakker", since: 2025, photo: "/images/leden/rein.jpg", focus: "center 20%" },
 ] as const;
 
-export const birthdays = [
-	{ name: "Yannick Kremers", when: "7 november", datetime: "--11-07" },
-	{ name: "Maurits Vonhögen", when: "27 november", datetime: "--11-27" },
-	{ name: "Riley Roodenburg", when: "29 januari", datetime: "--01-29" },
-	{ name: "Julius Broekhof", when: "5 maart", datetime: "--03-05" },
-	{ name: "Juriaan", when: "7 maart", datetime: "--03-07" },
+const months = [
+	"januari",
+	"februari",
+	"maart",
+	"april",
+	"mei",
+	"juni",
+	"juli",
+	"augustus",
+	"september",
+	"oktober",
+	"november",
+	"december",
 ] as const;
+
+// Day and month only, no year. The homepage orders these by the next occurrence.
+export const birthdays = [
+	{ name: "Riley Roodenburg", month: 1, day: 29 },
+	{ name: "Julius Broekhof", month: 3, day: 5 },
+	{ name: "Juriaan", month: 3, day: 7 },
+	{ name: "Yannick Kremers", month: 11, day: 7 },
+	{ name: "Maurits Vonhögen", month: 11, day: 27 },
+] as const;
+
+export type Birthday = (typeof birthdays)[number];
+
+/** Sort key that wraps past dates into next year, so the soonest birthday comes first. */
+export function nextBirthdayKey(month: number, day: number, now = new Date()) {
+	const today = (now.getMonth() + 1) * 100 + now.getDate();
+	const key = month * 100 + day;
+	return key < today ? key + 1300 : key;
+}
+
+export function upcomingBirthdays(now = new Date()) {
+	return [...birthdays]
+		.map((item) => ({
+			...item,
+			when: `${item.day} ${months[item.month - 1]}`,
+			datetime: `--${String(item.month).padStart(2, "0")}-${String(item.day).padStart(2, "0")}`,
+		}))
+		.sort((a, b) => nextBirthdayKey(a.month, a.day, now) - nextBirthdayKey(b.month, b.day, now));
+}
 
 export function initials(name: string) {
 	return name

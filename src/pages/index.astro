@@ -1,7 +1,11 @@
 ---
 import Base from "../layouts/Base.astro";
 import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
-import { birthdays, site } from "../data/site";
+import { members, site, upcomingBirthdays } from "../data/site";
+
+const agenda = upcomingBirthdays();
+const firstYear = Math.min(...members.map((member) => member.since));
+const lastYear = Math.max(...members.map((member) => member.since));
 ---
 
 <Base title={SITE_TITLE} description={SITE_DESCRIPTION}>
@@ -31,7 +35,7 @@ import { birthdays, site } from "../data/site";
 				<span>Dispuutshuis aan de Korvel</span>
 			</div>
 			<div>
-				<strong>17</strong>
+				<strong>{members.length}</strong>
 				<span>Actieve leden</span>
 			</div>
 			<div>
@@ -102,7 +106,9 @@ import { birthdays, site } from "../data/site";
 					<img src="/images/leden/fokke.jpg" alt="Portret van een lid van Die Blauwe Schuite" />
 					<div>
 						<h3>Leden</h3>
-						<p>Zeventien leden, uit de lichtingen van 2018 tot en met 2025. Individuen die samen één dispuut vormen.</p>
+						<p>
+							{members.length} leden, uit de lichtingen van {firstYear} tot en met {lastYear}. Individuen die samen één dispuut vormen.
+						</p>
 						<span class="more">Naar de leden</span>
 					</div>
 				</a>
@@ -139,10 +145,10 @@ import { birthdays, site } from "../data/site";
 			<div class="panel">
 				<p class="kicker">Agenda</p>
 				<h2>Verjaardagen</h2>
-				<ul class="birthday-list">
+				<ul class="birthday-list" data-birthdays>
 					{
-						birthdays.map((item) => (
-							<li>
+						agenda.map((item) => (
+							<li data-month={item.month} data-day={item.day}>
 								<span>{item.name}</span>
 								<time datetime={item.datetime}>{item.when}</time>
 							</li>
@@ -168,3 +174,18 @@ import { birthdays, site } from "../data/site";
 		</div>
 	</section>
 </Base>
+
+<script>
+	import { nextBirthdayKey } from "../data/site";
+
+	const list = document.querySelector<HTMLElement>("[data-birthdays]");
+	if (list) {
+		const items = [...list.children] as HTMLElement[];
+		items.sort(
+			(a, b) =>
+				nextBirthdayKey(Number(a.dataset.month), Number(a.dataset.day)) -
+				nextBirthdayKey(Number(b.dataset.month), Number(b.dataset.day)),
+		);
+		for (const item of items) list.append(item);
+	}
+</script>
